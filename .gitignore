@@ -13,3 +13,6 @@ Testing/
 *.a
 *.so
 *.exe
+
+# Doxygen output
+docs/
