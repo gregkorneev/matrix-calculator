@@ -1,14 +1,15 @@
+# CMake build directories
 build/
-cmake-build-*/
-*_build/
-CMakeCache.txt
 CMakeFiles/
-Testing/
-CTestTestfile.cmake
-CTestCustom.cmake
-install_manifest.txt
+CMakeCache.txt
+cmake_install.cmake
+Makefile
 
-# IDE/OS misc
-.DS_Store
-*.swp
-*.user
+# Testing artifacts
+Testing/
+
+# Binaries
+*.o
+*.a
+*.so
+*.exe
