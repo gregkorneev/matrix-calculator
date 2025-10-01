@@ -136,3 +136,30 @@ void matrix_to_file(Matrix m, const char* filename) {
     }
     fout.close();
 }
+// Конкатенация по горизонтали: [A | B]
+Matrix matrix_hstack(Matrix a, Matrix b) {
+    auto empty = []() -> Matrix { return Matrix{nullptr, 0, 0}; };
+
+    // Проверки валидности
+    if (a.data == nullptr || b.data == nullptr) return empty();
+    if (a.rows <= 0 || a.cols < 0 || b.rows <= 0 || b.cols < 0) return empty();
+    if (a.rows != b.rows) return empty();
+
+    // Создаём результат с суммой столбцов
+    Matrix c = create_matrix(a.rows, a.cols + b.cols);
+    if (c.data == nullptr) return empty();  // на случай неудачного выделения
+
+    // Копируем A слева
+    for (int i = 0; i < a.rows; ++i) {
+        for (int j = 0; j < a.cols; ++j) {
+            c.data[i][j] = a.data[i][j];
+        }
+    }
+    // Копируем B справа
+    for (int i = 0; i < b.rows; ++i) {
+        for (int j = 0; j < b.cols; ++j) {
+            c.data[i][a.cols + j] = b.data[i][j];
+        }
+    }
+    return c;
+}

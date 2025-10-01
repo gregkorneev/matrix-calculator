@@ -27,3 +27,7 @@ Matrix matrix_from_array(double* data, int rows, int cols);
 
 // Сохранение/загрузка
 void   matrix_to_file(Matrix m, const char* filename);
+// Объединение матриц по горизонтали: [A | B]
+// Требования: A.rows == B.rows, обе матрицы валидны (data != nullptr, rows>0, cols>0).
+// При нарушении условий возвращает пустую матрицу 0x0 (data == nullptr).
+Matrix matrix_hstack(Matrix a, Matrix b);

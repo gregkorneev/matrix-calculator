@@ -1,62 +1,57 @@
-// Main entry point for the matrix calculator demonstration program.
-//
-// This program exercises the basic functionality provided by the matrix
-// library: creation, addition, multiplication, transposition and summing of
-// elements. It serves as a simple manual test harness and is not required
-// for the unit tests.
-
 #include <iostream>
 #include "matrix.h"
 
+// print helper
+static void print_with_title(const char* title, const Matrix& m) {
+    std::cout << title << "\n";
+    print_matrix(m);
+    std::cout << "\n";
+}
+
 int main() {
-    try {
-        // Создаем тестовые матрицы
-        Matrix A = create_matrix(2, 2);
-        Matrix B = create_matrix(2, 2);
+    // Matrices A and B (2x2)
+    Matrix A = create_matrix(2, 2);
+    Matrix B = create_matrix(2, 2);
 
-        // Заполняем данными
-        A.data[0][0] = 1; A.data[0][1] = 2;
-        A.data[1][0] = 3; A.data[1][1] = 4;
+    // A = [[1,2],[3,4]]
+    A.data[0][0] = 1; A.data[0][1] = 2;
+    A.data[1][0] = 3; A.data[1][1] = 4;
 
-        B.data[0][0] = 5; B.data[0][1] = 6;
-        B.data[1][0] = 7; B.data[1][1] = 8;
+    // B = [[5,6],[7,8]]
+    B.data[0][0] = 5; B.data[0][1] = 6;
+    B.data[1][0] = 7; B.data[1][1] = 8;
 
-        std::cout << "Matrix A:" << std::endl;
-        print_matrix(A);
+    print_with_title("Matrix A:", A);
+    print_with_title("Matrix B:", B);
 
-        std::cout << "\nMatrix B:" << std::endl;
-        print_matrix(B);
+    // C = A + B
+    Matrix C = matrix_add(A, B);
+    print_with_title("A + B:", C);
 
-        // Тестируем сложение
-        Matrix C = matrix_add(A, B);
-        std::cout << "\nA + B:" << std::endl;
-        print_matrix(C);
+    // D = A * B
+    Matrix D = matrix_multiply(A, B);
+    print_with_title("A * B:", D);
 
-        // Тестируем умножение
-        Matrix D = matrix_multiply(A, B);
-        std::cout << "\nA * B:" << std::endl;
-        print_matrix(D);
+    // AT = A^T
+    Matrix AT = matrix_transpose(A);
+    print_with_title("Transpose of A:", AT);
 
-        // Тестируем транспонирование
-        Matrix E = matrix_transpose(A);
-        std::cout << "\nTranspose of A:" << std::endl;
-        print_matrix(E);
+    // Horizontal stack [A | B]
+    Matrix H = matrix_hstack(A, B);
+    print_with_title("HSTACK [A | B]:", H);
 
-        // Индивидуальное задание — сумма элементов
-        double total_sum = matrix_sum(A);
-        std::cout << "\nSum of all elements in matrix A: " << total_sum << std::endl;
+    // Sum elements in A
+    double s = matrix_sum(A);
+    std::cout << "Sum of all elements in matrix A: " << s << "\n\n";
 
-        // Освобождаем память
-        free_matrix(A);
-        free_matrix(B);
-        free_matrix(C);
-        free_matrix(D);
-        free_matrix(E);
+    std::cout << "All operations completed successfully!\n";
 
-        std::cout << "\nAll operations completed successfully!" << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
-    }
+    // Free all matrices
+    free_matrix(H);
+    free_matrix(AT);
+    free_matrix(D);
+    free_matrix(C);
+    free_matrix(B);
+    free_matrix(A);
     return 0;
 }
