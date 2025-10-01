@@ -1,0 +1,14 @@
+build/
+cmake-build-*/
+*_build/
+CMakeCache.txt
+CMakeFiles/
+Testing/
+CTestTestfile.cmake
+CTestCustom.cmake
+install_manifest.txt
+
+# IDE/OS misc
+.DS_Store
+*.swp
+*.user
