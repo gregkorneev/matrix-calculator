@@ -1,1 +1,0 @@
-/usr/bin/c++ -O2 -DNDEBUG -Wl,--dependency-file=CMakeFiles/matrix_calculator.dir/link.d CMakeFiles/matrix_calculator.dir/src/main.cpp.o -o matrix_calculator  libmatrix_lib.a
